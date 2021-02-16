@@ -1,0 +1,25 @@
+import sys
+import re
+
+def printFixedLink(ID):
+    if not ID:
+        print('ID cannot be found in the given link.')
+    else:
+        print('https://drive.google.com/u/0/uc?id='+ID+'&export=download')
+
+def getID(link):
+    pattern = 'https:\/\/drive\.google\.com\/file\/d\/(.*)/view'
+    if match := re.search(pattern, link, re.IGNORECASE):
+        return match.group(1)
+    return None
+
+def main():
+    if len(sys.argv) < 2:
+        print("Please provide one argument")
+    else:
+        link = sys.argv[1]
+        id = getID(link)
+        printFixedLink(id)
+
+if __name__ == "__main__":
+    main()
